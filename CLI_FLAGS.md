@@ -520,6 +520,8 @@ Execute a JavaScript file right after BotBrowser starts in a privileged, non-ext
 --bot-script="/path/to/script.js"
 ```
 
+At process launch, the script runs once for that browser process. Creating a BrowserContext does not replay it. Pass `--bot-script` explicitly in the context's `botbrowserFlags` when that context needs its own bootstrap.
+
 **Key Features:**
 - No framework dependencies: pure Chrome DevTools Protocol access
 - Earlier intervention: runs before navigation

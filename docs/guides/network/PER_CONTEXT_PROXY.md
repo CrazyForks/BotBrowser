@@ -118,6 +118,8 @@ const ctxB = await browser.createBrowserContext({
 // -> timezone = "Asia/Tokyo"
 ```
 
+Explicit geographic settings are resolved independently for each context and each setting. Settings left on `auto` continue to derive from that context's proxy.
+
 ### Using --proxy-ip to Skip Detection
 
 When you know the exit IP for each proxy, pass it via `--proxy-ip` to skip the auto-detection step. This eliminates the one-time IP lookup overhead per context. The proxy routing set via `createBrowserContext({ proxyServer })` is preserved:

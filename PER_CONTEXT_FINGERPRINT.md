@@ -351,6 +351,8 @@ Supported live session controls remain available after identity sealing when the
 
 ⚠️ Each context can load a completely different profile (`--bot-profile`), or use `--bot-config-*` flags to override specific settings from the browser's base profile.
 
+⚠️ A process-level `--bot-script` runs once at browser startup and is not replayed when new BrowserContexts are created. Pass `--bot-script` explicitly in a context's `botbrowserFlags` when that context needs its own automation bootstrap.
+
 ⚠️ Proxy merge semantics are explicit: `--proxy-server` in `botbrowserFlags` sets or replaces the context proxy route, while `--proxy-ip` only supplies the exit IP for geo-detection. If a context was created with `createBrowserContext({ proxyServer })`, a later `setBrowserContextFlags` call with only `--proxy-ip` preserves that proxy route.
 
 ⚠️ After identity sealing, dedicated proxy commands may update the route server or bypass rules while preserving the existing proxy IP identity. Changing or clearing `proxyIp` is rejected because it would change geo-derived identity. Create a new BrowserContext when the exit identity must change.

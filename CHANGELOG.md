@@ -3,6 +3,18 @@
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
 
+## [2026-07-24]
+### Major
+- **Chromium Core -> 150.0.7871.127**: Updated the BotBrowser 150 release line to 150.0.7871.127. Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.
+
+### Improvements
+- **Runtime Math Consistency**: Improved profile-backed runtime math behavior across supported host platforms and browser families.
+- **Proxy Regional Consistency**: Improved automatic language, locale, and timezone alignment for proxy-backed main and per-context sessions.
+- **Per-Context Automation Isolation**: Kept process-level automation bootstrap separate from context-scoped automation across multi-context workflows.
+- **Android Target Isolation**: Improved per-context platform behavior for external protocol handling in Android-target sessions.
+- **Navigation Stability**: Improved resilience for controlled response and extension-related navigation workflows.
+
+
 ## [2026-07-11]
 ### Major
 - **Chromium Core -> 150.0.7871.46**: Updated the BotBrowser 150 release line to 150.0.7871.46. Web Platform consistency, rendering accuracy, and security patches stay aligned with upstream Chrome.
