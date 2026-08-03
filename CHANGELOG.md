@@ -3,6 +3,18 @@
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
 
+## [2026-08-03]
+### Major
+- **Chromium Core -> 151.0.7922.47**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **CDP Mouse Move Coalescing (`--bot-cdp-coalesce`)**: Added an opt-in input mode for more natural mouse-movement delivery in supported automation workflows.
+- **V8Log API Filters (`--bot-v8-log-exclude-api`)**: Added exact API filtering for focused browser-runtime validation traces.
+
+### Improvements
+- **Network Information Policies (`--bot-network-info-override`)**: Added profile, native, and field-level custom JSON policies with consistent behavior across pages, workers, browser contexts, and requests.
+
+
 ## [2026-07-29]
 ### Major
 - **Chromium Core -> 151.0.7922.34**: Started the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.

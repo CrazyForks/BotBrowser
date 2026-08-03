@@ -76,6 +76,8 @@ Each entry shows availability and the primary guide. The guide documents startup
 - [`--bot-audio-record-file`](#flag-bot-audio-record-file) (Core): [AudioLab](docs/guides/getting-started/AUDIOLAB.md)
 - [`--bot-v8-log`](#flag-bot-v8-log) (Profile-dependent): [V8Log](docs/guides/getting-started/V8LOG.md)
 - [`--bot-v8-log-dir`](#flag-bot-v8-log-dir) (Profile-dependent): [V8Log](docs/guides/getting-started/V8LOG.md)
+- [`--bot-v8-log-exclude-api`](#flag-bot-v8-log-exclude-api) (Profile-dependent): [V8Log](docs/guides/getting-started/V8LOG.md#api-filters)
+- [`--bot-cdp-coalesce`](#flag-bot-cdp-coalesce) (Core): [Automation Consistency](docs/guides/getting-started/AUTOMATION_CONSISTENCY.md#cdp-mouse-move-coalescing)
 - [`--bot-script`](#flag-bot-script) (Core): [Bot Script](docs/guides/getting-started/BOT_SCRIPT.md)
 - [`--bot-custom-headers`](#flag-bot-custom-headers) (PRO): [Custom HTTP Headers](docs/guides/network/CUSTOM_HTTP_HEADERS.md)
 - [`--bot-disable-debugger`](#flag-bot-disable-debugger) (Core): [Automation Consistency](docs/guides/getting-started/AUTOMATION_CONSISTENCY.md)
@@ -509,6 +511,35 @@ Use an absolute directory path that already exists and is writable by the browse
 
 **Primary guide:** [V8Log](docs/guides/getting-started/V8LOG.md) | [Tool](tools/v8log/)
 
+<a id="--bot-v8-log-exclude-api"></a>
+<a id="flag-bot-v8-log-exclude-api"></a>
+### `--bot-v8-log-exclude-api`
+Exclude selected API names from a V8Log trace.
+
+```bash
+--bot-v8-log=full
+--bot-v8-log-exclude-api=String.charCodeAt,Array.join
+```
+
+Names are comma-separated and matched exactly. Whitespace around each name is ignored. Excluded calls are not written and do not consume the trace event budget. This flag only applies when V8Log is enabled and available in the active profile.
+
+**Primary guide:** [V8Log API Filters](docs/guides/getting-started/V8LOG.md#api-filters)
+
+<a id="--bot-cdp-coalesce"></a>
+<a id="flag-bot-cdp-coalesce"></a>
+### `--bot-cdp-coalesce`
+Enable BrowserContext-scoped coalescing for serial CDP mouse hover movement.
+
+```bash
+--bot-cdp-coalesce
+# Equivalent:
+--bot-cdp-coalesce=true
+```
+
+The default is off. Plain mouse hover moves are eligible; button, drag, wheel, keyboard, touch, pen, and relative-motion input keep their normal delivery paths. Set `--bot-cdp-coalesce=false` to disable it explicitly. Apply the flag before the first page is created in a BrowserContext.
+
+**Primary guide:** [Automation Consistency](docs/guides/getting-started/AUTOMATION_CONSISTENCY.md#cdp-mouse-move-coalescing)
+
 <a id="--bot-script"></a>
 <a id="flag-bot-script"></a>
 ### `--bot-script`
@@ -743,8 +774,33 @@ Runtime toggles that don’t rely on profile `configs` but still override behavi
 - `--bot-time-seed` (ENT Tier2): Integer seed (1-UINT32_MAX) for reproducible execution timing policy. `0` disables the feature. Guide: [Performance Fingerprinting](docs/guides/fingerprint/PERFORMANCE.md).
 <a id="flag-bot-stack-seed"></a>
 - `--bot-stack-seed` (ENT Tier2): Use `profile`, `real`, or a positive integer seed for stack depth policy across main thread, Worker, and WASM contexts. Guide: [Stack Depth](docs/guides/fingerprint/STACK_DEPTH.md).
+<a id="--bot-network-info-override"></a>
 <a id="flag-bot-network-info-override"></a>
-- `--bot-network-info-override`: Enable profile-defined network information values and corresponding Client Hints. Disabled by default. Guide: [Navigator Properties](docs/guides/fingerprint/NAVIGATOR_PROPERTIES.md).
+### `--bot-network-info-override`
+Control network information properties and corresponding Client Hints with one policy.
+
+```bash
+# Use every available network value from the profile
+--bot-network-info-override
+--bot-network-info-override=profile
+
+# Keep native Chromium network values
+--bot-network-info-override=false
+
+# Set selected values and keep omitted fields native
+--bot-network-info-override='{"effectiveType":"3g","rtt":180,"downlink":1.8,"saveData":false}'
+
+# Mix profile, native, and custom values by field
+--bot-network-info-override='{"type":"profile","rtt":"host","downlink":2.5,"saveData":"profile"}'
+```
+
+The bare flag, an empty value, `true`, and `profile` use all available profile network values. `false` keeps native Chromium behavior. A JSON object can configure `type`, `effectiveType`, `rtt`, `downlink`, `downlinkMax`, and `saveData` independently. Each JSON field accepts a supported value or the source selector `profile` or `host`; omitted fields remain native.
+
+Invalid JSON, unknown fields, invalid values, and unavailable `profile` references reject the policy as a whole. Custom and `host` policies can be used without a profile. The CLI policy overrides `configs.networkInfoOverride`, whose profile configuration remains limited to `true` or `false`.
+
+The resolved policy follows the active BrowserContext across pages, workers, navigation, and supported Client Hints paths. Apply identity-bearing changes before the first page is created.
+
+**Primary guide:** [Navigator Properties](docs/guides/fingerprint/NAVIGATOR_PROPERTIES.md#network-information)
 <a id="--bot-gpu-emulation"></a>
 <a id="flag-bot-gpu-emulation"></a>
 - `--bot-gpu-emulation` (ENT Tier2, default `true`): Accepts `false`, `true`, or `priority`. Guide: [Linux GPU Backend](docs/guides/deployment/LINUX_GPU_BACKEND.md#gpu-emulation-modes).
