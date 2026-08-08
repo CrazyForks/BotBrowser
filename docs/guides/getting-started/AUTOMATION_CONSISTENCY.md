@@ -78,7 +78,7 @@ Automation frameworks can introduce browser-environment inconsistencies that und
 
 3. **Framework bindings.** Playwright injects `__playwright__binding__` and `__pwInitScripts` into the page context. The `addInitScript` call removes these before any page JavaScript executes.
 
-4. **Chrome DevTools Protocol (CDP) artifacts.** BotBrowser's console suppression feature (`--bot-disable-console-message`) ensures consistent console API behavior when CDP is connected.
+4. **Chrome DevTools Protocol (CDP) artifacts.** BotBrowser's console suppression feature (`--bot-disable-console-message`) keeps protected console and runtime events from changing page-visible behavior when CDP is connected. It does not disable the CDP Runtime domain, so normal evaluation and exception handling remain available.
 
 5. **`--bot-script` alternative.** For the smallest framework footprint, use `--bot-script` instead of an external framework. This runs JavaScript in a privileged isolated page context with `chrome.debugger` access. No external framework bindings or separate CDP client connections are needed.
 
@@ -143,7 +143,9 @@ chrome.debugger.getTargets((targets) => {
 
 ### Console suppression for CDP consistency
 
-Some runtime consistency checks can infer CDP connections by monitoring console behavior. BotBrowser's `--bot-disable-console-message` flag (ENT Tier1, enabled by default) prevents frameworks from activating these CDP domains, keeping runtime behavior consistent with non-instrumented sessions.
+Some runtime consistency checks can infer CDP connections from changes that automation can cause in console or exception behavior. BotBrowser's `--bot-disable-console-message` flag (ENT Tier1, enabled by default) suppresses the protected event paths while keeping normal CDP evaluation and exception propagation available.
+
+When a protected profile is used, connecting Playwright or Puppeteer and enabling the Runtime domain does not add a page-visible Error-stack timing signal. Keep the flag enabled for routine automation. Diagnostic sessions that intentionally disable the protection should be treated as a separate compatibility run.
 
 <a id="cdp-mouse-move-coalescing"></a>
 ### CDP mouse move coalescing
