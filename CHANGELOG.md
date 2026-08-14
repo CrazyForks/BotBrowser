@@ -3,6 +3,20 @@
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
 
+## [2026-08-14]
+### Major
+- **Chromium Core -> 151.0.7922.76**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **Per-Context UDP Proxy Policy (`--bot-udp-proxy`)**: Added per-context control over UDP proxy and HTTP/3 handling, so sibling browser contexts sharing one profile can independently opt in or out.
+
+### Improvements
+- **Timezone and Geolocation Consistency**: Improved profile-backed timezone and location alignment across pages, workers, and browser contexts when routing through proxies.
+- **Cross-Platform Font Consistency**: Improved font metric consistency for browser-family profiles running across host platforms.
+- **Per-Context Consistency**: Improved per-context fingerprint identity consistency.
+- **Server Stability**: Improved stability on servers without dedicated graphics hardware.
+
+
 ## [2026-08-03]
 ### Major
 - **Chromium Core -> 151.0.7922.47**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.

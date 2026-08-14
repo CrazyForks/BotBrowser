@@ -96,6 +96,17 @@ Use the standard `--disable-quic` flag when you want HTTP traffic to stay on TCP
 
 This disables QUIC/HTTP/3. It does not disable WebRTC or STUN; those continue to follow your UDP-over-SOCKS5 and WebRTC settings.
 
+### Per-context UDP policy (ENT Tier3)
+
+When several browser contexts share one profile, use `--bot-udp-proxy` to keep UDP proxy and HTTP/3 on for some contexts and off for others in the same browser process. A bare flag means true.
+
+```bash
+--bot-udp-proxy=false   # process-wide default for this profile
+--bot-udp-proxy=true    # per-context override through Per-Context Fingerprint
+```
+
+Set the process default on the main command line, then override it per context through Per-Context Fingerprint. Unlike `--disable-quic`, which takes the whole process off QUIC, this policy stays scoped to the context that sets it. It applies only to profiles that already carry the UDP entitlement.
+
 ### When the proxy does not support UDP
 
 If the proxy does not support UDP ASSOCIATE, BotBrowser falls back gracefully:

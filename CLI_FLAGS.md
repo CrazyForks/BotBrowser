@@ -58,6 +58,7 @@ Each entry shows availability and the primary guide. The guide documents startup
 
 - [`--proxy-server`](#flag-proxy-server) (Core; Context/Live ENT Tier3): [Proxy Configuration](docs/guides/network/PROXY_CONFIGURATION.md)
 - [`--disable-quic`](#flag-disable-quic) (Standard Chromium): [UDP over SOCKS5](docs/guides/network/UDP_OVER_SOCKS5.md)
+- [`--bot-udp-proxy`](#flag-bot-udp-proxy) (ENT Tier3): [UDP over SOCKS5](docs/guides/network/UDP_OVER_SOCKS5.md)
 - [`--proxy-pac-url`](#flag-proxy-pac-url) (Core PAC; callback ENT Tier3): [PAC Request Policy](docs/guides/network/PAC_REQUEST_POLICY.md)
 - [`--proxy-ip`](#flag-proxy-ip) (ENT Tier1): [Proxy and Geolocation](docs/guides/network/PROXY_GEOLOCATION_ALIGNMENT.md)
 - [`--proxy-bypass-rgx`](#flag-proxy-bypass-rgx) (PRO): [Proxy Selective Routing](docs/guides/network/PROXY_SELECTIVE_ROUTING.md)
@@ -239,6 +240,20 @@ To keep SOCKS5 proxying but avoid QUIC/HTTP/3, add the standard `--disable-quic`
 ```
 
 `--disable-quic` affects QUIC/HTTP/3 only. WebRTC/STUN behavior still follows the UDP-over-SOCKS5 and WebRTC settings.
+
+<a id="--bot-udp-proxy-ent-tier3"></a>
+<a id="flag-bot-udp-proxy"></a>
+### `--bot-udp-proxy` (ENT Tier3)
+Set the UDP proxy and HTTP/3 policy for a single browser context. Sibling contexts that share one profile can keep it on for one context and off for another, without taking the whole browser process off QUIC with `--disable-quic`.
+
+```bash
+# Bare flag means true
+--bot-udp-proxy
+--bot-udp-proxy=true
+--bot-udp-proxy=false
+```
+
+Supply it on the main command line for a process-wide default, or through Per-Context Fingerprint when a context should override that default. A context inherits the main-process value when it does not set its own, and the policy can be switched after the context is created. This flag applies only to profiles that already carry the UDP entitlement and never grants the capability on its own. Process-level `--disable-quic` still takes priority. See [UDP over SOCKS5](docs/guides/network/UDP_OVER_SOCKS5.md).
 
 <a id="pac-request-policy-ent-tier3"></a>
 <a id="pac-like-request-callback-ent-tier3"></a>
