@@ -147,7 +147,7 @@ const page = await ctx.newPage();
 ## Limitations
 
 - **Proxy must support UDP ASSOCIATE.** Not all SOCKS5 proxies support UDP. Check with your provider. HTTP and HTTPS proxies do not support UDP tunneling.
-- **Browser-level setting.** UDP proxy support applies at the browser level and cannot be configured per-context independently.
+- **Proxy transport stays browser-level.** The SOCKS5 UDP association is negotiated per proxy route. `--bot-udp-proxy` controls whether a context uses UDP proxying and HTTP/3, and applies only to profiles that carry the UDP entitlement.
 - **QUIC control.** Use `--disable-quic` when your workload should avoid QUIC/HTTP/3. This does not disable WebRTC.
 - **Performance.** UDP-over-SOCKS5 adds latency compared to direct UDP. For latency-sensitive WebRTC applications, this trade-off favors privacy over raw speed.
 
