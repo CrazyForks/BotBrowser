@@ -216,6 +216,23 @@ await client.send("BotBrowser.setBrowserContextFlags", {
 });
 ```
 
+### Per-context UDP / QUIC policy (ENT Tier3)
+
+Each context can independently enable or disable UDP proxy and HTTP/3 with `--bot-udp-proxy`, without taking the whole browser process off QUIC. Set a process-wide default on the main command line, then override per context:
+
+```javascript
+await client.send("BotBrowser.setBrowserContextFlags", {
+  browserContextId: ctx._contextId,
+  botbrowserFlags: [
+    "--bot-profile=/path/to/profile.enc",
+    "--proxy-server=socks5://user:pass@proxy.example.com:1080",
+    "--bot-udp-proxy=false",
+  ],
+});
+```
+
+See [UDP over SOCKS5](UDP_OVER_SOCKS5.md) for the full per-context UDP policy.
+
 ---
 
 <a id="troubleshooting"></a>
