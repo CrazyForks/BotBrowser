@@ -293,7 +293,7 @@ Use this when request-aware policy should stay in PAC routing instead of CDP-lev
 
 <a id="flag-proxy-ip"></a>
 ### `--proxy-ip` (ENT Tier1)
-Specify the proxy's public IP to optimize performance.
+Specify the proxy's public exit IP to optimize geo setup. Provide one IPv4 address, one IPv6 address, or a comma-separated pair containing one address from each family. When both are supplied, the first address is used for geo setup and each network family keeps its matching exit identity.
 
 **Primary guide:** [Proxy and Geolocation](docs/guides/network/PROXY_GEOLOCATION_ALIGNMENT.md)
 
@@ -301,6 +301,8 @@ This skips per-page IP lookups and speeds up navigation.
 
 ```bash
 --proxy-ip="203.0.113.1"
+--proxy-ip="2001:db8::1009"
+--proxy-ip="203.0.113.1,2001:db8::1009"
 ```
 
 **Benefits:**
@@ -758,7 +760,7 @@ Runtime toggles that don’t rely on profile `configs` but still override behavi
 <a id="flag-bot-disable-debugger"></a>
 - `--bot-disable-debugger`: Ignore JavaScript `debugger` statements to avoid pauses. Guide: [Automation Consistency](docs/guides/getting-started/AUTOMATION_CONSISTENCY.md).
 <a id="flag-bot-mobile-force-touch"></a>
-- `--bot-mobile-force-touch`: Force touch events on/off for mobile device simulation. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
+- `--bot-mobile-force-touch[=true|false]`: Force touch events on/off for Android and iOS/WebKit-family mobile profiles. Can be combined with `--bot-mobile-keyboard`. Guide: [Device Emulation](docs/guides/platform/DEVICE_EMULATION.md).
 <a id="flag-bot-disable-console-message"></a>
 - `--bot-disable-console-message` (ENT Tier1): Suppress console output forwarded through automation protocols. Default: true. Guide: [Console Suppression](docs/guides/fingerprint/CONSOLE_SUPPRESSION.md).
 <a id="flag-bot-inject-random-history"></a>
@@ -809,9 +811,9 @@ Control network information properties and corresponding Client Hints with one p
 --bot-network-info-override='{"type":"profile","rtt":"host","downlink":2.5,"saveData":"profile"}'
 ```
 
-The bare flag, an empty value, `true`, and `profile` use all available profile network values. `false` keeps native Chromium behavior. A JSON object can configure `type`, `effectiveType`, `rtt`, `downlink`, `downlinkMax`, and `saveData` independently. Each JSON field accepts a supported value or the source selector `profile` or `host`; omitted fields remain native.
+The bare flag, `true`, and `profile` use all available profile network values. `false` keeps native Chromium behavior. A JSON object can configure `type`, `effectiveType`, `rtt`, `downlink`, `downlinkMax`, and `saveData` independently. Each JSON field accepts a supported value or the source selector `profile` or `host`; omitted fields remain native.
 
-Invalid JSON, unknown fields, invalid values, and unavailable `profile` references reject the policy as a whole. Custom and `host` policies can be used without a profile. The CLI policy overrides `configs.networkInfoOverride`, whose profile configuration remains limited to `true` or `false`.
+Invalid JSON, unknown fields, invalid values, and unavailable `profile` references cause the policy to be ignored and measured network values to remain in use. Custom and `host` policies can be used without a profile. The CLI policy overrides `configs.networkInfoOverride`. The profile config accepts `true`, `false`, `profile`, or a JSON policy using the same field selectors and values.
 
 The resolved policy follows the active BrowserContext across pages, workers, navigation, and supported Client Hints paths. Apply identity-bearing changes before the first page is created.
 

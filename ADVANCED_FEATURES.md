@@ -98,7 +98,7 @@ await page.goto('https://example.co.uk');
 **Supported protocols:** `socks5://`, `socks5h://`, `http://`, `https://`, all with embedded authentication (`user:pass@host:port`).
 
 **Optional parameters:**
-- `proxyIp`: provides the proxy's exit IP to skip automatic IP detection, resulting in faster geo-based timezone and language adaptation.
+- `proxyIp`: provides the proxy's exit IP to skip automatic IP detection, resulting in faster geo-based timezone and language adaptation. It accepts IPv4, IPv6, or a comma-separated IPv4 and IPv6 pair.
 - `proxyBypassList`: semicolon-separated list of hosts/patterns that should bypass the proxy (e.g., `localhost;*.internal.com`).
 - `proxyBypassRgx`: regex pattern (RE2 syntax) for URLs that should bypass the proxy. Supports `|` for multiple patterns (e.g., `cdn\.example\.com|/api/health`).
 

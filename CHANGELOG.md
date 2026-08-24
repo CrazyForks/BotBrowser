@@ -3,6 +3,21 @@
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
 
+## [2026-08-24]
+### Major
+- **Chromium Core -> 151.0.7922.138**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+### New
+- **Page Translation**: Added support for browser page translation with customer-managed Google Cloud Translation API credentials.
+- **Dual-Stack Proxy Identity**: `--proxy-ip` and per-context `proxyIp` now support IPv4, IPv6, or one address from each family.
+
+### Improvements
+- **Network Information Configuration**: Profile and per-context policies now share consistent validation and browser behavior, including custom JSON policies.
+- **Local DNS and Proxy Routing**: Improved address-family alignment for supported proxy connections.
+- **Graphics Readback Consistency**: Improved Canvas and WebGL readback behavior across supported rendering formats and browser contexts.
+- **Proxy Navigation Startup**: Reduced unnecessary startup waits for proxy-backed navigation.
+
+
 ## [2026-08-14]
 ### Major
 - **Chromium Core -> 151.0.7922.76**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.

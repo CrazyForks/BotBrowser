@@ -204,7 +204,7 @@ await Promise.all([
 
 ### Per-Context Proxy with Known IP
 
-Pass the proxy via context creation options, and set `--proxy-ip` via CDP to skip IP lookups.
+Pass the proxy via context creation options, and set `--proxy-ip` via CDP to skip IP lookups. The value can be IPv4, IPv6, or a comma-separated pair containing one address from each family.
 
 > **Note**: Puppeteer uses `proxyServer`, Playwright uses `proxy: { server }`. See [examples/](examples/) for framework-specific syntax. `--proxy-ip` only updates the exit IP for geo-detection. When calling `setBrowserContextFlags` with only `--proxy-ip` (no `--proxy-server`), the proxy routing set via `createBrowserContext({ proxyServer })` is preserved.
 
@@ -348,7 +348,7 @@ Supported live session controls remain available after identity sealing when the
 
 ⚠️ Per-context proxy via `botbrowserFlags` or `createBrowserContext` must be set before navigation. To switch proxies at runtime, use `BotBrowser.setBrowserContextProxy` (ENT Tier3). See [Dynamic Proxy Switching](ADVANCED_FEATURES.md#dynamic-proxy-switching).
 
-⚠️ UDP proxy support applies at the browser level and cannot be configured per-context. LocalDNS policy can be assigned per context and remains a supported live-safe policy after identity sealing.
+⚠️ UDP proxy support requires an eligible profile. Use `--bot-udp-proxy=true` or `false` in a context to choose its UDP and HTTP/3 policy; process-level `--disable-quic` still takes priority. LocalDNS policy can be assigned per context and remains a supported live-safe policy after identity sealing.
 
 ⚠️ Each context can load a completely different profile (`--bot-profile`), or use `--bot-config-*` flags to override specific settings from the browser's base profile.
 

@@ -130,7 +130,17 @@ Headless and mobile profiles default to profile-backed dimensions. Desktop headf
 | [`noiseSeed`](../CLI_FLAGS.md#flag-bot-noise-seed) | `0`, or an integer from 1 to UINT32_MAX (ENT Tier2) | Profile default |
 | [`timeSeed`](../CLI_FLAGS.md#flag-bot-time-seed) | `0`, or an integer from 1 to UINT32_MAX (ENT Tier2) | `0` |
 | [`stackSeed`](../CLI_FLAGS.md#flag-bot-stack-seed) | `profile`, `real`, or a positive integer (ENT Tier2) | `real` |
-| [`networkInfoOverride`](../CLI_FLAGS.md#flag-bot-network-info-override) | `true`, `false` | `false` |
+| [`networkInfoOverride`](../CLI_FLAGS.md#flag-bot-network-info-override) | `true`, `false`, `profile`, or JSON policy | `false` |
+
+For a custom policy, use a JSON string so the profile remains valid JSON:
+
+```json
+{
+  "configs": {
+    "networkInfoOverride": "{\"type\":\"profile\",\"rtt\":\"host\",\"downlink\":2.5}"
+  }
+}
+```
 
 Video playback cadence is a CLI-only policy. See [`--bot-video-fps`](../CLI_FLAGS.md#flag-bot-video-fps). JavaScript heap and storage quota policies are also configured at runtime through [`--bot-js-heap-size-limit`](../CLI_FLAGS.md#flag-bot-js-heap-size-limit) and [`--bot-storage-quota`](../CLI_FLAGS.md#flag-bot-storage-quota).
 

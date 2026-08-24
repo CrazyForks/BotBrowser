@@ -102,7 +102,7 @@ DPR affects the `DPR` Client Hints header and `window.devicePixelRatio`.
 
 For mobile profiles, touch events are automatically enabled. The profile defines the touch point count, touch event availability, and primary pointer type.
 
-Use `--bot-mobile-force-touch` to explicitly enable or disable touch events:
+Use `--bot-mobile-force-touch[=true|false]` to explicitly enable or disable touch events for Android and iOS/WebKit-family mobile profiles. It can be combined with `--bot-mobile-keyboard`:
 
 ```bash
 # Force touch events on

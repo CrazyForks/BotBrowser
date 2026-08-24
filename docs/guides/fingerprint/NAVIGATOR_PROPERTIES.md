@@ -99,7 +99,7 @@ Use one policy for JavaScript network information and corresponding Client Hints
 --bot-network-info-override='{"type":"profile","effectiveType":"profile","rtt":"host","downlink":2.5,"downlinkMax":"host","saveData":"profile"}'
 ```
 
-The bare flag, an empty value, `true`, and `profile` use every available value under the profile's network information. `false` keeps native Chromium behavior.
+The bare flag, `true`, and `profile` use every available value under the profile's network information. `false` keeps native Chromium behavior.
 
 A JSON policy accepts these fields:
 
@@ -112,9 +112,9 @@ A JSON policy accepts these fields:
 | `downlinkMax` | Non-negative number in the supported range | `profile`, `host` |
 | `saveData` | `true`, `false` | `profile`, `host` |
 
-Omitted fields remain native. Invalid JSON, unknown fields, invalid values, or a `profile` selector without the required profile field reject the complete policy. A custom or `host` policy can be used without a profile.
+Omitted fields remain native. Invalid JSON, unknown fields, invalid values, or a `profile` selector without the required profile field cause the policy to be ignored and measured values to remain in use. A custom or `host` policy can be used without a profile.
 
-The CLI policy takes priority over `configs.networkInfoOverride`. The profile config remains a boolean setting: `true` selects profile values and `false` keeps native behavior.
+The CLI policy takes priority over `configs.networkInfoOverride`. The profile config accepts `true`, `false`, `profile`, or a JSON policy using the same field selectors and values.
 
 The resolved policy is scoped to the active BrowserContext and remains consistent across pages, workers, navigation, and supported request headers. Set it before creating the first page in that context.
 

@@ -34,6 +34,8 @@ chromium-browser \
   --proxy-ip=203.0.113.1
 ```
 
+`--proxy-ip` accepts IPv4, IPv6, or a comma-separated pair containing one address from each family. Use a pair when the proxy has distinct IPv4 and IPv6 exit identities.
+
 ---
 
 <a id="how-it-works"></a>
