@@ -33,7 +33,7 @@ chromium-browser \
 
 Key flags in this example:
 
-- `--proxy-ip` skips the automatic IP lookup request, saving one HTTP roundtrip on first navigation.
+- `--proxy-ip` skips the automatic IP lookup request, saving one HTTP roundtrip during context activation.
 - `--disable-audio-output` disables audio processing overhead.
 - `--user-data-dir` with a temp directory prevents profile data conflicts.
 
@@ -258,7 +258,7 @@ chromium-browser \
 
 | Problem | Solution |
 |---------|----------|
-| Slow first page load | Add `--proxy-ip` to skip IP lookup. The first navigation triggers geo-lookup by default. |
+| Slow context activation | Add `--proxy-ip` to skip the automatic IP lookup. |
 | High memory with many instances | Use Per-Context Fingerprint with fewer browser processes. Each process has baseline overhead. |
 | CPU spikes during idle | Disable background features: `--disable-background-networking`, `--disable-sync`. |
 | Slow screenshot capture | Ensure a virtual display is running on Linux. Consider reducing profile screen resolution for faster rendering. |

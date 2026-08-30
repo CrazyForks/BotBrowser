@@ -109,7 +109,7 @@ If city-level mapping is not precise enough for your use case, keep GeoIP for ba
 
 ## Performance Notes
 
-- First-time IP resolution can add startup latency.
+- Automatic IP resolution can add context activation latency.
 - `--proxy-ip` removes that external IP resolution roundtrip.
 - Lookup results are reused during session flow after initialization.
 
@@ -124,7 +124,7 @@ If city-level mapping is not precise enough for your use case, keep GeoIP for ba
 | Wrong timezone/locale after startup | Set explicit `--bot-config-timezone` / `--bot-config-locale`. |
 | IP resolution fails | Provide `--proxy-ip` directly or replace IP services via `--bot-ip-service`. |
 | City/coordinates look off | Expected for some IP ranges. Use `--bot-config-location` for exact coordinates. |
-| Slow first navigation | Use `--proxy-ip` to skip initial IP-resolution request. |
+| Slow context activation | Use `--proxy-ip` to skip the initial IP-resolution request. |
 
 ---
 

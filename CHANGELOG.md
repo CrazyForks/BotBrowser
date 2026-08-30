@@ -2,6 +2,16 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-08-30]
+### Major
+- **Chromium Core -> 151.0.7922.174**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.
+
+### Improvements
+- **Per-Context Proxy and Geographic Consistency**: Improved runtime proxy updates, geographic identity delivery, and route reuse across browser contexts.
+- **Automatic GeoIP Resolution**: Improved resilient proxy-location resolution for supported address families and context lifecycle changes.
+- **WebKit-Family Runtime Consistency**: Improved profile-backed browser and worker runtime behavior while preserving Chromium-family sessions.
+- **SOCKS5 UDP Reliability**: Improved connection lifecycle stability for authorized UDP proxy and HTTP/3 workflows.
+
 
 ## [2026-08-24]
 ### Major
