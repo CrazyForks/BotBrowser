@@ -2,6 +2,15 @@
 
 > **Research scope:** Entries in this changelog describe features evaluated in authorized labs and defensive benchmarking programs. Follow the [Legal Disclaimer](DISCLAIMER.md) and [Responsible Use Guidelines](RESPONSIBLE_USE.md). We work with security vendors to investigate any misuse, so report concerns to [support@botbrowser.io](mailto:support@botbrowser.io).
 
+## [2026-09-02]
+### Major
+- **Chromium Core -> 152.0.7977.54**: Started the BotBrowser 152 release line with upstream Web Platform, rendering, and security updates.
+
+### Improvements
+- **Per-Context Identity Consistency**: Improved profile-backed browser identity consistency across navigation and request workflows.
+- **Per-Context Window and Viewport Consistency**: Improved profile-backed window and viewport behavior across desktop and mobile workflows.
+- **WebKit-Family Graphics Consistency**: Improved profile-backed graphics consistency for focused Canvas workflows.
+
 ## [2026-08-30]
 ### Major
 - **Chromium Core -> 151.0.7922.174**: Updated the BotBrowser 151 release line with upstream Web Platform, rendering, and security updates.

@@ -304,7 +304,7 @@ Most `--bot-*` flags from [CLI_FLAGS.md](CLI_FLAGS.md) work with per-context con
 | Storage and Memory | [`--bot-js-heap-size-limit`](CLI_FLAGS.md#flag-bot-js-heap-size-limit) and [`--bot-storage-quota`](CLI_FLAGS.md#flag-bot-storage-quota) for profile, real, or explicit byte-value policy |
 | Network | [`--bot-network-info-override`](CLI_FLAGS.md#flag-bot-network-info-override) for profile, native, or custom JSON network information policy, [`--bot-local-dns`](CLI_FLAGS.md#flag-bot-local-dns) for context DNS policy |
 | WebRTC | [`--bot-webrtc-ice`](ADVANCED_FEATURES.md#webrtc-leak-protection) for ICE endpoint control |
-| Window | [`--bot-always-active`](ADVANCED_FEATURES.md#active-window-emulation) to maintain active window state |
+| Screen and Window | [`--bot-config-window`](docs/guides/fingerprint/SCREEN_WINDOW.md) and [`--bot-config-screen`](docs/guides/fingerprint/SCREEN_WINDOW.md) for profile-backed desktop and mobile display settings, [`--bot-always-active`](ADVANCED_FEATURES.md#active-window-emulation) to maintain active window state |
 | Session | `--bot-inject-random-history` for session authenticity (supports precise count, e.g., `=15`), `--bot-cookies` for context-scoped cookie import at creation time |
 | Automation | [`--bot-cdp-coalesce`](CLI_FLAGS.md#flag-bot-cdp-coalesce) for context-scoped CDP hover movement, `--bot-script` for framework-less automation bootstrap at creation time |
 | Diagnostics | [`--bot-v8-log-exclude-api`](CLI_FLAGS.md#flag-bot-v8-log-exclude-api) for context-scoped V8Log API filters |
@@ -317,7 +317,7 @@ See [CLI_FLAGS.md](CLI_FLAGS.md) for the complete flag reference.
 
 ## Context Identity Lifecycle
 
-A BrowserContext accepts its full profile and identity configuration until its first renderer starts. This includes profile, browser and platform identity, locale, screen and window metrics, and other fingerprint-bearing settings.
+A BrowserContext accepts its full profile and identity configuration until its first renderer starts. This includes profile, browser and platform identity, locale, screen and window metrics, and other fingerprint-bearing settings. Profile-backed screen and window settings remain associated with that context across desktop and mobile workflows.
 
 After the first page or worker starts, the context identity is sealed. Later identity-bearing changes are rejected instead of partially updating an active context. Create a new BrowserContext when a different profile or device identity is required.
 

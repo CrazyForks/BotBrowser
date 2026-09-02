@@ -88,6 +88,12 @@ Desktop profiles default to `real` in headful mode, meaning the browser uses act
 --bot-config-screen=profile
 ```
 
+<a id="per-context-configuration"></a>
+
+### Per-Context Configuration
+
+For Per-Context Fingerprint, pass `--bot-config-window` and `--bot-config-screen` in `botbrowserFlags` before the context creates its first page or worker. The selected display policy then remains associated with that BrowserContext across desktop and mobile profile workflows. See [Per-Context Fingerprint](../../../PER_CONTEXT_FINGERPRINT.md) for the setup order.
+
 ---
 
 <a id="how-botbrowser-controls"></a>
